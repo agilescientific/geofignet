@@ -1,0 +1,2 @@
+# geofignet
+Geological figure classifier
