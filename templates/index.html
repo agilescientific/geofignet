@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container">
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="alert alert-warning" role="alert">
+        {% for message in messages %}
+          <p style="padding-top:12px;">{{ message }}</p>
+        {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+  <div class="hero-unit">
+
+    <p class="lead" style="margin-bottom:24px;">Give <strong>geofignet</strong> the URL of an image. It classifies it.</p>
+
+      <form class="form-inline" id="theform" action="https://www.pythonanywhere.com/infer">
+        <input type="text" class="input-large" name="image" id="image" placeholder="URL of image" value="{% if url %}{{ url }}{% else %}{% endif %}">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      {% if url %}
+
+          <h3>{{ clas }}
+          <small class="text-muted">p = {{ prob }}</small>
+          </h3>
+          <p><a href="{{ url }}"><img src={{ url }} /></a></p>
+
+          {% if plot %}
+              <img src="data:image/png;base64,{{ plot }}">
+          {% endif %}
+
+      {% else %}
+
+        <p>For example: <a href="http://geofignet.geosci.ai/infer?image=https://virtualexplorer.com.au/article/2002/53/evolution-of-the-western-mediterranean/media/figure07.png">https://virtualexplorer.com.au/article/2002/53/evolution-of-the-western-mediterranean/media/figure07.png</a></p>
+
+      {% endif %}
+
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="container">
+<h1>Welcome to geofignet's API</h1>
+<p><strong>geofignet</strong> accepts URLs of geological images. The human interface is <a href="https://geofignet.geosci.ai/">here</a>.</p>
+</div>
+<div class="container">
+<h2>GET request</h2>
+<p>You can use <code>GET</code> if you just want to send one public URL. There's only one query parameter:</p>
+<ul>
+<li><code>image</code> — the input image. Can be a public URL or a base64-encoded string.</li>
+</ul>
+<p>A request might look like this:</p>
+<p><a href="https://geofignet.geosci.ai/api?image=https://virtualexplorer.com.au/article/2002/53/evolution-of-the-western-mediterranean/media/figure07.png"></a></p><pre><a href="https://geofignet.geosci.ai/api?image=https://virtualexplorer.com.au/article/2002/53/evolution-of-the-western-mediterranean/media/figure07.png">https://geofignet.geosci.ai/api?image=https://virtualexplorer.com.au/article/2002/53/evolution-of-the-western-mediterranean/media/figure07.png</a></pre><p></p>
+<p></p>
+<p>Or, using Python <code>requests</code>, this GET request is the same as the one shown in the link above.</p>
+<pre>import requests
+
+url = "https://geofignet.geosci.ai/api"
+params = {'image': "https://virtualexplorer.com.au/article/2002/53/evolution-of-the-western-mediterranean/media/figure07.png"}
+headers = {"Accept": "application/json"}
+
+response = requests.get(url, headers=headers, params=params)
+response.json()</pre>
+</div>
+<div class="container">
+<h2>POST request</h2>
+<p>Use <code>POST</code> if you want to send several images at once, or if you want to send base64-encoded data instead of a public URL. You can send up to 10 images at once.</p>
+<ul>
+<li><code>requests</code> — a list of image dicts like <code>[{'image': image_url}, {'image': image_b64}]</code>.</li>
+</ul>
+<p>To base64-encode an image, you can use this code:</p>
+<pre>from PIL import Image
+from io import BytesIO
+import base64
+
+img = Image.open("My_image_file.jpg")
+handle = BytesIO()
+img.save(handle, format='png')
+handle.seek(0)
+img_b64 = base64.b64encode(handle.getvalue()).decode('utf-8')</pre>
+<p>This POST request makes requests for 2 images, one with a URL, the other with a base64-encoded string:</p>
+<pre>import requests
+
+url = "https://geofignet.geosci.ai/api"
+json = {'requests': [
+            {'image': "https://virtualexplorer.com.au/article/2002/53/evolution-of-the-western-mediterranean/media/figure07.png"},
+            {'image': img_b64},  # See above for code to make base64-encoded images.
+headers = {"Accept": "application/json"}
+
+response = requests.post(url, headers=headers, json=json)
+response.json()</pre>
+<p>You might want to do something like this:</p>
+<pre>for result in r.json()['results']:
+    print(f"Prediction: {result['top_class']}, p = {result['top_prob']:0.4f}")
+</pre>
+</div>
+
+{% endblock %}

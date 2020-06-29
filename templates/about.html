@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+  <div class="container">
+
+        <div class="hero-unit">
+
+        <h3>About geofignet</h3>
+          <p><strong>What?</strong> This web app tries to guess the type of geological figure represented by an image you give it.</p>
+
+          <p><strong>Whence?</strong> The training extended ResNet-18 using the PyTorch deep-learning framework. It was trained on 1200 images (plus augmentation) with single labels in 20 classes. The validation accuracy was 0.88.</p>
+
+          <p><strong>How?</strong> There are two ways to use the app: go to <a href="https://geofignet.geosci.ai/">the home page</a> and use the form; or <a href="https://geofignet.geosci.ai/api">use the API</a>.</p>
+
+          <p><strong>Why?</strong> The app is just for fun. No data whatsoever is stored or transmitted.</p>
+
+          <p><strong>What are the classes?</strong>
+
+          </p><ul>
+<li><b>blockdiagram</b> — Block diagrams</li>
+<li><b>chronostrat</b> — Chronostratigraphic columns</li>
+<li><b>corephoto</b> — Core photos</li>
+<li><b>correlation</b> — Correlation panels</li>
+<li><b>equation</b> — Mathematical equations</li>
+<li><b>fieldnote</b> — Field notes and sketches</li>
+<li><b>fmilog</b> — Resistivity or conductivity image logs</li>
+<li><b>geologicmap</b> — Geological maps</li>
+<li><b>outcrop</b> — Outcrop photos</li>
+<li><b>photomicrograph</b> — Photomicrographs</li>
+<li><b>regionalsection</b> — Regional cross-sections</li>
+<li><b>rosediagram</b> — Rose diagrams</li>
+<li><b>seismic</b> — Seismic data</li>
+<li><b>semicrograph</b> — SEM micrographs</li>
+<li><b>stereonet</b> — Stereonets</li>
+<li><b>structuremap</b> — Structure maps</li>
+<li><b>synthetic</b> — Synthetic seismograms</li>
+<li><b>table</b> — Tables</li>
+<li><b>ternary</b> — Ternary plots</li>
+<li><b>welllog</b> — Well logs</li>
+                </ul>
+          <p></p>
+
+        <hr>
+
+        <h3>TODO</h3>
+        <ul>
+        <li>Image upload on the UI.</li>
+        <li>More classes.</li>
+        <li>Alert us of incorrect labels.</li>
+        <li>Multi-label classification.</li>
+        <li>Choose version of net, e.g. ResNet-18, ResNet-50, VGG16, etc.</li>
+        <li>Send multiple images.</li>
+        <li>Segmentation.</li>
+        <li>More images, more training.</li>
+        </ul>
+
+      </div>
+
+  </div>
+
+{% endblock %}
