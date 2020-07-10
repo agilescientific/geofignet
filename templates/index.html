@@ -16,7 +16,7 @@
 
     <p class="lead" style="margin-bottom:24px;">Give <strong>geofignet</strong> the URL of an image. It classifies it.</p>
 
-      <form class="form-inline" id="theform" action="https://www.pythonanywhere.com/infer">
+      <form class="form-inline" id="theform" action="/infer">
         <input type="text" class="input-large" name="image" id="image" placeholder="URL of image" value="{% if url %}{{ url }}{% else %}{% endif %}">
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
